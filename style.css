@@ -14,7 +14,7 @@ body {
 img {
     width: 300px;
     height: 300px;
-    background-color:#b29267;
+    
     
 }
 
@@ -33,12 +33,14 @@ img {
     gap: 25px;
 
 }
-.box {
-    
+button {
     background-color: #b29267;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     margin-bottom: 25px;
-    border-radius: 10px;
+    border-radius: 20px;
+    padding: 20px;
+    
+    
     
 
 }
@@ -53,11 +55,11 @@ h1 {
 }
 
 .score-table {
-    font-size: 30px;
+    font-size: 50px;
     font-weight: 900;
 }
 
 
 h1, .score-table, .text {
-    color: white;
+    color: #482719;
 }
