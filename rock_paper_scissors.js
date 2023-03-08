@@ -6,6 +6,7 @@ function getComputerChoice() {
 }
 
 function playRound (playerSelection, computerSelection) {
+     
     
     
     
@@ -13,26 +14,32 @@ function playRound (playerSelection, computerSelection) {
 
         case (playerSelection === "rock" && computerSelection === "paper"):
             text.textContent ="That's too bad! paper beats rock";
-            return 0
-            
+            computerScore++
+            break
         case (playerSelection === "paper" && computerSelection === "scissors"):
             text.textContent ="Bad election! scissors beat paper";
-            return 0
-            
+            computerScore++
+            break
         case (playerSelection === "scissors" && computerSelection === "rock"):
             text.textContent ="Oh noo! rock beat scissors";
-            return  0
+            computerScore++
+            break
         case (playerSelection === "paper" && computerSelection === "rock"):
             text.textContent ="You're really good! paper beats rock";
-            return 1
+            playerScore++
+            break
         case (playerSelection === "scissors" && computerSelection === "paper"):
             text.textContent ="Nice election! Scissors beat paper";
-            return 1
+            playerScore++
+            break
         case (playerSelection === "rock" && computerSelection === "scissors"):
             text.textContent ="You rock! Rock beat scissors";
-            return 1
+            playerScore++
+            break
         default:
             text.textContent ="It's a tie";
+            break
+            
             
     }
 }
@@ -54,30 +61,49 @@ function initialState() {
 }
 
 function updateScore(playerScore, computerScore) {
-    score.textContent = `${playerScore} - ${computerScore}`
+    score.textContent = `${playerScore} - ${computerScore}`;
 }
 
+function openModal() {
+    modal.style.display = "block";
+}
+
+function closeModal() {
+    modal.style.display = "none";
+    initialState();
+    
+}
 
 let computerScore = 0;
 let playerScore = 0;
 const text = document.querySelector(".text");
 const score = document.querySelector(".score");
-const btns = Array.from(document.querySelectorAll('button'));
+const modal = document.querySelector(".modal");
+const modalTitle = document.querySelector(".modal-title");
+const restart = document.querySelector(".restart");
+restart.addEventListener('click', closeModal);
+const btns = Array.from(document.querySelectorAll('.btn'));
 btns.forEach(btn => btn.addEventListener('click', game));
 
 
 
-function game() {
-    const playerSelection = this.className
+
+
+function game(e) {
+    const playerSelection = e.target.alt;
     const computerSelection = getComputerChoice();
 
     if (gameisOver()) {
-        initialState();
-    } 
-    playRound(playerSelection, computerSelection) ? playerScore++ : computerScore++;
-    updateScore(playerScore, computerScore);
-
-
+        if (playerScore > computerScore) {
+            modalTitle.textContent = "You won!!";
+        } else {
+            modalTitle.textContent = "You lose !!";
+        }
+        openModal();
+    } else {
+        playRound(playerSelection, computerSelection);
+        updateScore(playerScore, computerScore);
+    }
     
 
 }     
